@@ -42,11 +42,22 @@ from langchain.vectorstores import FAISS
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
-## Bedrock Clients
-bedrock = boto3.client(service_name="bedrock-runtime", region_name="us-east-1")
-# Calling the bedrock embedding
-bedrock_embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1", client=bedrock)
+# Load credentials from Streamlit secrets
+aws_access_key = st.secrets["AWS_ACCESS_KEY_ID"]
+aws_secret_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
+aws_region = st.secrets["AWS_DEFAULT_REGION"]
 
+# Initialize the Bedrock client with credentials from secrets
+bedrock = boto3.client(
+    service_name="bedrock-runtime",
+    region_name=aws_region,
+    aws_access_key_id=aws_access_key,
+    aws_secret_access_key=aws_secret_key
+)
+
+# Calling the Bedrock embedding
+from langchain_community.embeddings import BedrockEmbeddings
+bedrock_embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1", client=bedrock)
 
 def data_ingestion(uploaded_files):
     # Initialize a list to hold all the documents
