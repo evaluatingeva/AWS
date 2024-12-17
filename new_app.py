@@ -11,7 +11,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
 # Include pytesseract for OCR
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = "tesseract"
 # Update with your Tesseract path
 
 def save_uploadedfile(uploadedfile):
