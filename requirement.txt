@@ -1,6 +1,10 @@
+streamlit
 boto3
+pillow
+pytesseract
+langchain
+faiss-cpu
+numpy
+pandas
 awscli
 pypdf
-langchain
-streamlit
-faiss-cpu
